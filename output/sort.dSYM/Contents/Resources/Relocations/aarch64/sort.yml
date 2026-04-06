@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/parveshyadav/repo of cpp/output/sort'
+relocations:     []
+...
