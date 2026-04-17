@@ -1,29 +1,29 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+
 using namespace std;
 
-class Test {
-private:
-    int a, b; 
-
-public:
-    void input() {
-        cout << "Enter a and b: ";
-        cin >> a >> b;
-    }
-
-    void display() {
-        for (int i = a; i <= b; ++i) {
-            if (i % 2 == 0) {
-                cout << i << " ";
-            }
-        }
-        cout << endl;
-    }
-};
-
 int main() {
-    Test t;
-    t.input();
-    t.display();
+    string name;
+    int roll;
+
+    // This creates and opens the file in one step
+    ofstream file("studenlt.txt");
+    
+    // Check if the file opened successfully
+    if (file.is_open()) {
+        cout << "Enter name and roll number: " << endl;
+        cin >> name >> roll;
+
+        file << "name : " << name << endl;
+        file << "roll number : " << roll << endl;
+
+        file.close();
+        cout << "Data saved successfully to studenlt.txt!" << endl;
+    } else {
+        cout << "Error: Could not create the file." << endl;
+    }
+
     return 0;
 }
