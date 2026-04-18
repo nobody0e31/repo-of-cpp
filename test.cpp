@@ -1,49 +1,59 @@
-#include <iostream>
-// FIX 1: Added namespace so cout and cin work
-using namespace std; 
+#include<iostream>
+using namespace std;
 
-template<class T>
-// FIX 2: Capitalized 'Swap' to avoid conflicts with built-in C++ functions
-class Swap 
-{
+class point {
 public:
-    // FIX 3: Replaced 'int' with 'T' to actually use the template
-    T a, b; 
+    // 1. Changed 'a' and 'b' to 'x' and 'y' to match how you use them later
+    int x, y;
 
-    void input()
-    {
-        cout << "Enter value of a and b: ";
-        cin >> a >> b;
+    // Constructor
+    point(int xVal = 0, int yVal = 0) {
+        x = xVal;
+        y = yVal;
     }
-
-    void operation()
-    {
-        // FIX 4: Replaced 'int' with 'T' and fixed the swapping logic
-        T temp; 
-        temp = a; // Store 'a' safely first
-        a = b;    // Overwrite 'a' with 'b'
-        b = temp; // Put the safely stored 'a' into 'b'
-    }
-
-    void show()
-    {
-        // Added spaces so the numbers don't print squished together
-        cout << "Values after swap: " << a << " " << b << endl; 
-    }
-
-}; // FIX 5: Added the mandatory semicolon at the end of the class
-
-// FIX 6: Moved main() completely OUTSIDE of the class. It must return 'int'.
-int main()
-{
-    // FIX 7: Because it's a template, you must tell it what type to use inside < >
-    Swap<int> s; 
     
-    // FIX 8: Put the method calls in the correct logical order
-    s.input();
-    s.operation();
-    s.show();
+    // 2. Fixed return type: Removed the extra 'int' before 'point'
+    point operator+(const point & obj) {
+        point result;
+        result.x = this->x + obj.x;
+        result.y = this->y + obj.y;
 
-    // FIX 9: Placed return inside main()
-    return 0; 
+        return result;
+    }
+
+    // 3. Added the missing operator- so p1 - p2 works in main()
+    point operator-(const point & obj) {
+        point result;
+        result.x = this->x - obj.x;
+        result.y = this->y - obj.y;
+
+        return result;
+    }
+
+    // 4. Fixed to print the actual member variables
+    void display() {
+        cout << "Coordinates: " << x << " " << y << endl;
+    }
+};
+
+int main() {
+    point p1(19, 35);
+    point p2(5, 3);
+
+    cout << "Point 1: ";
+    p1.display();
+    
+    cout << "Point 2: ";
+    p2.display();
+    
+    point p3 = p1 + p2;
+    point p4 = p1 - p2; // This now works!
+    
+    cout << "\nAfter Addition: ";
+    p3.display();
+    
+    cout << "After Subtraction: ";
+    p4.display();
+
+    return 0;
 }
