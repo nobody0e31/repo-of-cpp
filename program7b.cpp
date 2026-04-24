@@ -44,6 +44,7 @@ int main(){
 
     p1.display();
     p2.display();
+    
     point p3 = p1+ p2;
     point p4 = p1 - p2;
     p3.display();

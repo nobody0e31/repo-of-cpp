@@ -1,59 +1,40 @@
-#include<iostream>
+#include <iostream>
+#include <string>
+
 using namespace std;
 
-class point {
-public:
-    // 1. Changed 'a' and 'b' to 'x' and 'y' to match how you use them later
-    int x, y;
+// 1. The Base Class (Parent)
+class Person {
+  public:
+    string name;
 
-    // Constructor
-    point(int xVal = 0, int yVal = 0) {
-        x = xVal;
-        y = yVal;
+    void breathe() {
+        cout << name << " is taking a breath." << endl;
     }
-    
-    // 2. Fixed return type: Removed the extra 'int' before 'point'
-    point operator+(const point & obj) {
-        point result;
-        result.x = this->x + obj.x;
-        result.y = this->y + obj.y;
+};
 
-        return result;
-    }
+// 2. The Derived Class (Child)
+// The syntax "class Child : public Parent" creates the inheritance
+class Student : public Person {
+  public:
+    int roll;
 
-    // 3. Added the missing operator- so p1 - p2 works in main()
-    point operator-(const point & obj) {
-        point result;
-        result.x = this->x - obj.x;
-        result.y = this->y - obj.y;
-
-        return result;
-    }
-
-    // 4. Fixed to print the actual member variables
-    void display() {
-        cout << "Coordinates: " << x << " " << y << endl;
+    void study() {
+        // The student can use 'name' because it inherited it from Person!
+        cout << name << " is studying hard for exams." << endl;
     }
 };
 
 int main() {
-    point p1(19, 35);
-    point p2(5, 3);
+    Student s1;
+    
+    // Setting properties. 'name' comes from Person, 'roll' comes from Student.
+    s1.name = "Alice"; 
+    s1.roll = 101;
 
-    cout << "Point 1: ";
-    p1.display();
-    
-    cout << "Point 2: ";
-    p2.display();
-    
-    point p3 = p1 + p2;
-    point p4 = p1 - p2; // This now works!
-    
-    cout << "\nAfter Addition: ";
-    p3.display();
-    
-    cout << "After Subtraction: ";
-    p4.display();
+    // Calling methods
+    s1.breathe(); // Inherited from Person
+    s1.study();   // Unique to Student
 
     return 0;
 }
