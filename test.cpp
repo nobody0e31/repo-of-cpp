@@ -1,40 +1,59 @@
 #include <iostream>
-#include <string>
-
 using namespace std;
 
-// 1. The Base Class (Parent)
-class Person {
-  public:
-    string name;
+class Fibonacci {
+private:
+    int n; // Number of terms to generate
 
-    void breathe() {
-        cout << name << " is taking a breath." << endl;
+public:
+    // 1. Parameterized Constructor
+    // It takes 'terms' as an argument when the object is created
+    Fibonacci(int terms) {
+        n = terms;
     }
-};
 
-// 2. The Derived Class (Child)
-// The syntax "class Child : public Parent" creates the inheritance
-class Student : public Person {
-  public:
-    int roll;
+    // 2. Function to calculate and print the series
+    void displaySeries() {
+        int t1 = 0;
+        int t2 = 1;
+        int nextTerm = 0;
 
-    void study() {
-        // The student can use 'name' because it inherited it from Person!
-        cout << name << " is studying hard for exams." << endl;
+        cout << "Fibonacci Series up to " << n << " terms: \n";
+
+        for (int i = 1; i <= n; ++i) {
+            // Print the first term
+            if(i == 1) {
+                cout << t1 << " ";
+                continue;
+            }
+            // Print the second term
+            if(i == 2) {
+                cout << t2 << " ";
+                continue;
+            }
+            
+            // Calculate and print the next terms
+            nextTerm = t1 + t2;
+            t1 = t2;
+            t2 = nextTerm;
+            
+            cout << nextTerm << " ";
+        }
+        cout << endl;
     }
 };
 
 int main() {
-    Student s1;
+    int num;
     
-    // Setting properties. 'name' comes from Person, 'roll' comes from Student.
-    s1.name = "Alice"; 
-    s1.roll = 101;
+    cout << "Enter the number of terms for the Fibonacci series: ";
+    cin >> num;
 
-    // Calling methods
-    s1.breathe(); // Inherited from Person
-    s1.study();   // Unique to Student
+    // 3. Creating the object and passing the argument to the constructor
+    Fibonacci myFibonacci(num);
+    
+    // 4. Calling the display function
+    myFibonacci.displaySeries();
 
     return 0;
 }

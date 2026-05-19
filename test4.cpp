@@ -1,38 +1,37 @@
-#include<iostream>
+#include <iostream>
+#include <string> // 1. Added the string library
+
 using namespace std;
-class sum
-{
-private:
-int n,sum,a;
-public:
-void input()
-{
 
-    cout<<"enter n";
-    cin>>n;     
+class student {
+  private:
+    int rollno;
+    string name; // 2. Switched from char array to standard string
 
-}
-void out()
-{
-   
-  
-   sum=0;
-while(n>0)
-    {
-        a=n%10;
-        sum=sum+a;
-       
-        n=n/10;
-
+  public:
+    // 3. Updated the constructor to accept a string
+    student(int r, string n) {
+        rollno = r;
+        name = n; // Now this works perfectly!
     }
-    cout<<"sum is"<<sum<<endl;
 
-}
+    // 4. Added 'void'
+    void display() {
+        cout << "Roll: " << rollno << endl;
+        cout << "Name: " << name << endl;
+    }
 };
-int main()
-{
-    sum s;
-    s.input();
-    s.out();
+
+int main() {
+    // 5. Added quotes around "py"
+    student s1(32, "py"); 
+    s1.display();
+    
+    cout << "------------------" << endl;
+
+    // 6. If you want an s2, you have to create it first!
+    student s2(45, "Alex");
+    s2.display();
+
     return 0;
 }
